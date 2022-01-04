@@ -1,4 +1,3 @@
-import './app.css';
 import { HomePage } from './pages/homepage/HomePage';
 import { Questionary } from './pages/questionary/Questionary';
 import {
