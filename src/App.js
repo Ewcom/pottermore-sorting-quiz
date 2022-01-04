@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import './app.css';
+import { HomePage } from './pages/homepage/HomePage';
+import { Questionary } from './pages/questionary/Questionary';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+import { useState } from 'react';
+import { pointsContext } from './context/pointsContext'
+import { Result } from './pages/result/Result';
 
 function App() {
+
+
+  //initializing context object for global access to the points 
+  const [contextPoints, setContextPoints] = useState({
+    gryffindorScore: 0,
+    ravenclawScore: 0,
+    hufflepuffScore: 0,
+    slytherinScore: 0,
+  })
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <pointsContext.Provider value={{ contextPoints, setContextPoints }}>
+      <BrowserRouter>
+        <Routes>
+
+          <Route path="/" element={<HomePage />} />
+          <Route path="/questions" element={<Questionary />} />
+          <Route path="/results" element={<Result />} />
+
+
+
+        </Routes>
+      </BrowserRouter>
+    </pointsContext.Provider>
+  )
 }
 
 export default App;
